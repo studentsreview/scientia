@@ -2,6 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Course {
+  _id: ID!
+  name: String!
+  department: String!
+  sectioned: Boolean!
+  prerequisites: [String!]!
+  notes: String!
+  length: String!
+  AtoG: String!
+  description: String!
+}
+
 type Query {
+  course(_id: String!): Course
+  courses: [Course!]!
   hello: String!
 }
