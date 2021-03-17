@@ -15,16 +15,10 @@ export class ClassesService {
     return this.classModel.findById(_id);
   }
 
-  async findAll(args: FindAllArgs) {
-    return this.classModel.find().skip(args.skip).limit(args.take);
-  }
-
-  async findAllByName(name: string, args: FindAllArgs) {
-    return this.classModel
-      .find({
-        name,
-      })
-      .skip(args.skip)
-      .limit(args.take);
+  async findAll(
+    query: Partial<Class> = {},
+    args: FindAllArgs = new FindAllArgs(),
+  ) {
+    return this.classModel.find(query).skip(args.skip).limit(args.take);
   }
 }

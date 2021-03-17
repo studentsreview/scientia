@@ -1,5 +1,6 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import { modelOptions, prop } from '@typegoose/typegoose';
+import { modelOptions, prop, Ref } from '@typegoose/typegoose';
+import { Teacher } from 'src/teachers/models/teacher.model';
 
 @modelOptions({ schemaOptions: { collection: 'classes' } })
 @ObjectType()
@@ -24,9 +25,9 @@ export class Class {
   room: string;
 
   // TODO: make ref
-  @prop()
-  @Field()
-  teacher: string;
+  @prop({ ref: Teacher, foreignField: 'name', localField: 'teacher' })
+  @Field(() => Teacher)
+  teacher: Ref<Teacher>;
 
   @prop()
   @Field()

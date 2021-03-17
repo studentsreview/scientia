@@ -20,16 +20,8 @@ export class CoursesResolver {
   @Query(() => [Course])
   courses(
     @Args()
-    args: FindAllArgs = new FindAllArgs(),
+    args: FindAllArgs,
   ) {
-    return this.coursesService.findAll(args);
-  }
-
-  @ResolveField(() => [Class])
-  classes(
-    @Parent() course: Course,
-    @Args() args: FindAllArgs = new FindAllArgs(),
-  ) {
-    return this.classesService.findAllByName(course.name, args);
+    return this.coursesService.findAll({}, args);
   }
 }

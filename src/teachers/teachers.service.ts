@@ -1,14 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { FindAllArgs } from 'src/common/dto/findall.args';
-import { CourseModel } from './courses.constants';
-import { Course } from './models/course.model';
+import { Teacher } from './models/teacher.model';
+import { TeacherModel } from './teachers.constants';
 
 @Injectable()
-export class CoursesService {
+export class TeachersService {
   constructor(
-    @Inject(CourseModel)
-    private readonly courseModel: ReturnModelType<typeof Course>,
+    @Inject(TeacherModel)
+    private readonly courseModel: ReturnModelType<typeof Teacher>,
   ) {}
 
   async findOneById(_id: string) {
@@ -21,10 +21,7 @@ export class CoursesService {
     });
   }
 
-  async findAll(
-    query: Partial<Course> = {},
-    args: FindAllArgs = new FindAllArgs(),
-  ) {
-    return this.courseModel.find(query).skip(args.skip).limit(args.take);
+  async findAll(args: FindAllArgs) {
+    return this.courseModel.find().skip(args.skip).limit(args.take);
   }
 }

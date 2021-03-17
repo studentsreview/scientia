@@ -2,13 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Teacher {
+  _id: ID!
+  name: String!
+  departments: [String!]!
+  semesters: [String!]!
+}
+
 type Class {
   _id: ID!
   name: String!
   code: String!
   block: String!
   room: String!
-  teacher: String!
+  teacher: Teacher!
   semester: String!
   section: String
   seats: [Int!]
@@ -25,7 +32,7 @@ type Course {
   length: String!
   AtoG: String!
   description: String!
-  classes(skip: Int = 0, take: Int = 25): [Class!]!
+  classes: [Class!]!
 }
 
 type Query {

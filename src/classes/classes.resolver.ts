@@ -20,9 +20,9 @@ export class ClassesResolver {
   @Query(() => [Class])
   classes(
     @Args()
-    args: FindAllArgs = new FindAllArgs(),
+    args: FindAllArgs,
   ) {
-    return this.classesService.findAll(args);
+    return this.classesService.findAll({}, args);
   }
 
   @ResolveField(() => Course)
