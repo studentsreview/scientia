@@ -4,6 +4,7 @@ import { CoursesResolver } from './courses.resolver';
 import { Course } from './models/course.model';
 import { CourseModel } from './courses.constants';
 import { CoursesService } from './courses.service';
+import { ClassesModule } from 'src/classes/classes.module';
 
 const courseModelFactory = {
   provide: CourseModel,
@@ -13,6 +14,8 @@ const courseModelFactory = {
 };
 
 @Module({
+  imports: [ClassesModule],
   providers: [CoursesResolver, courseModelFactory, CoursesService],
+  exports: [CoursesService],
 })
 export class CoursesModule {}

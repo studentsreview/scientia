@@ -2,6 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Class {
+  _id: ID!
+  name: String!
+  code: String!
+  block: String!
+  room: String!
+  teacher: String!
+  semester: String!
+  section: String
+  seats: [Int!]
+  course: Course!
+}
+
 type Course {
   _id: ID!
   name: String!
@@ -12,10 +25,12 @@ type Course {
   length: String!
   AtoG: String!
   description: String!
+  classes(skip: Int = 0, take: Int = 25): [Class!]!
 }
 
 type Query {
   course(_id: String!): Course
-  courses: [Course!]!
-  hello: String!
+  courses(skip: Int = 0, take: Int = 25): [Course!]!
+  class(_id: String!): Class
+  classes(skip: Int = 0, take: Int = 25): [Class!]!
 }

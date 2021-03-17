@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
+import { FindAllArgs } from 'src/common/dto/findall.args';
 import { CourseModel } from './courses.constants';
 import { Course } from './models/course.model';
 
@@ -14,7 +15,13 @@ export class CoursesService {
     return this.courseModel.findById(_id);
   }
 
-  async findAll() {
-    return this.courseModel.find();
+  async findOneByName(name: string) {
+    return this.courseModel.findOne({
+      name,
+    });
+  }
+
+  async findAll(args: FindAllArgs) {
+    return this.courseModel.find().skip(args.skip).limit(args.take);
   }
 }
