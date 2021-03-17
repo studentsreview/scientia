@@ -14,7 +14,7 @@ export class CoursesResolver {
 
   @Query(() => Course, { nullable: true })
   course(@Args('_id') _id: string) {
-    return this.coursesService.findOneById(_id);
+    return this.coursesService.findOne({ _id });
   }
 
   @Query(() => [Course])
@@ -23,5 +23,10 @@ export class CoursesResolver {
     args: FindAllArgs,
   ) {
     return this.coursesService.findAll({}, args);
+  }
+
+  @ResolveField(() => [Class])
+  classes(@Parent() course: Course, @Args() args: FindAllArgs) {
+    return this.classesService.findAll({ name: course.name }, args);
   }
 }

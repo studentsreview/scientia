@@ -2,24 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Teacher {
-  _id: ID!
-  name: String!
-  departments: [String!]!
-  semesters: [String!]!
-}
-
 type Class {
   _id: ID!
   name: String!
   code: String!
   block: String!
   room: String!
-  teacher: Teacher!
   semester: String!
   section: String
   seats: [Int!]
   course: Course!
+  teacher: Teacher!
 }
 
 type Course {
@@ -32,7 +25,15 @@ type Course {
   length: String!
   AtoG: String!
   description: String!
-  classes: [Class!]!
+  classes(skip: Int = 0, take: Int = 25): [Class!]!
+}
+
+type Teacher {
+  _id: ID!
+  name: String!
+  departments: [String!]!
+  semesters: [String!]!
+  classes(skip: Int = 0, take: Int = 25): [Class!]!
 }
 
 type Query {
@@ -40,4 +41,6 @@ type Query {
   courses(skip: Int = 0, take: Int = 25): [Course!]!
   class(_id: String!): Class
   classes(skip: Int = 0, take: Int = 25): [Class!]!
+  teacher(_id: String!): Teacher
+  teachers(skip: Int = 0, take: Int = 25): [Teacher!]!
 }

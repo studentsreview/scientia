@@ -11,20 +11,18 @@ export class CoursesService {
     private readonly courseModel: ReturnModelType<typeof Course>,
   ) {}
 
-  async findOneById(_id: string) {
-    return this.courseModel.findById(_id);
-  }
-
-  async findOneByName(name: string) {
-    return this.courseModel.findOne({
-      name,
-    });
+  async findOne(query: Partial<Course> = {}) {
+    return this.courseModel.findOne(query).populate('classes');
   }
 
   async findAll(
     query: Partial<Course> = {},
     args: FindAllArgs = new FindAllArgs(),
   ) {
-    return this.courseModel.find(query).skip(args.skip).limit(args.take);
+    return this.courseModel
+      .find(query)
+      .populate('classes')
+      .skip(args.skip)
+      .limit(args.take);
   }
 }

@@ -11,17 +11,14 @@ export class TeachersService {
     private readonly courseModel: ReturnModelType<typeof Teacher>,
   ) {}
 
-  async findOneById(_id: string) {
-    return this.courseModel.findById(_id);
+  async findOne(query: Partial<Teacher> = {}) {
+    return this.courseModel.findOne(query);
   }
 
-  async findOneByName(name: string) {
-    return this.courseModel.findOne({
-      name,
-    });
-  }
-
-  async findAll(args: FindAllArgs) {
-    return this.courseModel.find().skip(args.skip).limit(args.take);
+  async findAll(
+    query: Partial<Teacher> = {},
+    args: FindAllArgs = new FindAllArgs(),
+  ) {
+    return this.courseModel.find(query).skip(args.skip).limit(args.take);
   }
 }

@@ -11,8 +11,8 @@ export class ClassesService {
     private readonly classModel: ReturnModelType<typeof Class>,
   ) {}
 
-  async findOneById(_id: string) {
-    return this.classModel.findById(_id);
+  async findOne(query: Partial<Class> = {}) {
+    return this.classModel.findById(query);
   }
 
   async findAll(

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { mongoose } from '@typegoose/typegoose';
+import { ClassesModule } from './classes/classes.module';
 import { CoursesModule } from './courses/courses.module';
+import { TeachersModule } from './teachers/teachers.module';
 
 const connectionFactory = {
   provide: 'CONNECTION',
@@ -21,6 +23,8 @@ const connectionFactory = {
       autoSchemaFile: 'schema.gql',
     }),
     CoursesModule,
+    ClassesModule,
+    TeachersModule,
   ],
 })
 export class AppModule {}

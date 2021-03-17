@@ -14,7 +14,7 @@ export class TeachersResolver {
 
   @Query(() => Teacher, { nullable: true })
   teacher(@Args('_id') _id: string) {
-    return this.teachersService.findOneById(_id);
+    return this.teachersService.findOne({ _id });
   }
 
   @Query(() => [Teacher])
@@ -22,7 +22,7 @@ export class TeachersResolver {
     @Args()
     args: FindAllArgs = new FindAllArgs(),
   ) {
-    return this.teachersService.findAll(args);
+    return this.teachersService.findAll({}, args);
   }
 
   @ResolveField(() => [Class])

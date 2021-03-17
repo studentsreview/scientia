@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { getModelForClass } from '@typegoose/typegoose';
-import { ClassesService } from 'src/classes/classes.service';
+import { ClassesModule } from 'src/classes/classes.module';
 import { Teacher } from './models/teacher.model';
 import { TeacherModel } from './teachers.constants';
 import { TeachersResolver } from './teachers.resolver';
@@ -14,7 +14,7 @@ const teacherModelFactory = {
 };
 
 @Module({
-  imports: [ClassesService],
+  imports: [forwardRef(() => ClassesModule)],
   providers: [TeachersResolver, teacherModelFactory, TeachersService],
   exports: [TeachersService],
 })
