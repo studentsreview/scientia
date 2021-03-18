@@ -31,11 +31,7 @@ export class CoursesResolver {
     @Args()
     args: GetCoursesArgs,
   ) {
-    const query = {} as FilterQuery<Course>;
-    if (args.department) query.department = args.department;
-    if (args.AtoG) query.AtoG = args.AtoG;
-
-    return this.coursesService.findAll(query, args);
+    return this.coursesService.findAll({}, args);
   }
 
   @ResolveField(() => [Class])
