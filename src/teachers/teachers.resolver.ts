@@ -1,4 +1,11 @@
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Float,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { ClassesService } from 'src/classes/classes.service';
 import { Class } from 'src/classes/models/class.model';
 import { GetTeachersArgs } from './dto/teachers.args';
@@ -6,12 +13,14 @@ import { TeachersService } from './teachers.service';
 import { Teacher } from './models/teacher.model';
 import { FilterQuery } from 'mongoose';
 import { GetClassesArgs } from 'src/classes/dto/classes.args';
+import { ReviewsService } from 'src/reviews/reviews.service';
 
 @Resolver(() => Teacher)
 export class TeachersResolver {
   constructor(
-    private readonly classesService: ClassesService,
     private readonly teachersService: TeachersService,
+    private readonly classesService: ClassesService,
+    private readonly reviewsService: ReviewsService,
   ) {}
 
   @Query(() => Teacher, { nullable: true })
@@ -23,7 +32,7 @@ export class TeachersResolver {
     if (_id) query._id = _id;
     if (name) query.name = name;
 
-    return this.teachersService.findOne({ _id, name });
+    return this.teachersService.findOne(query);
   }
 
   @Query(() => [Teacher])
@@ -42,5 +51,16 @@ export class TeachersResolver {
       },
       args,
     );
+  }
+
+  @ResolveField(() => Float)
+  async rating(@Parent() teacher: Teacher) {
+    const reviews = await this.reviewsService.findAll(
+      {
+        teacher: teacher.name,
+      },
+      {},
+    );
+    return reviews.reduce((acc, cur) => acc + cur.rating, 0) / reviews.length;
   }
 }

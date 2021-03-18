@@ -3,6 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { mongoose } from '@typegoose/typegoose';
 import { ClassesModule } from './classes/classes.module';
 import { CoursesModule } from './courses/courses.module';
+import { ReviewsModule } from './reviews/reviews.module';
 import { TeachersModule } from './teachers/teachers.module';
 
 const connectionFactory = {
@@ -25,6 +26,7 @@ const connectionFactory = {
     CoursesModule,
     ClassesModule,
     TeachersModule,
+    ReviewsModule,
   ],
 })
 export class AppModule {}
