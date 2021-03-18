@@ -13,7 +13,7 @@ export class ReviewsResolver {
   ) {}
 
   @Query(() => Review, { nullable: true })
-  review(@Args('_id') _id: string) {
+  review(@Args('_id', { nullable: true }) _id: string) {
     return this.reviewsService.findOne({ _id });
   }
 

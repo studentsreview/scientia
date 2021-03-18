@@ -16,7 +16,7 @@ export class ClassesResolver {
   ) {}
 
   @Query(() => Class, { nullable: true })
-  class(@Args('_id') _id: string) {
+  class(@Args('_id', { nullable: true }) _id: string) {
     return this.classesService.findOne({ _id });
   }
 

@@ -25,8 +25,8 @@ export class TeachersResolver {
 
   @Query(() => Teacher, { nullable: true })
   teacher(
-    @Args('_id', { defaultValue: undefined }) _id: string,
-    @Args('name', { defaultValue: undefined }) name: string,
+    @Args('_id', { nullable: true }) _id: string,
+    @Args('name', { nullable: true }) name: string,
   ) {
     const query = {} as FilterQuery<Teacher>;
     if (_id) query._id = _id;
