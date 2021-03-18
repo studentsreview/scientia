@@ -47,7 +47,7 @@ type Review {
   _id: ID!
   text: String!
   timestamp: String!
-  rating: Int!
+  rating: Float!
   version: Int!
   teacher: Teacher!
 }

@@ -1,4 +1,4 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Float, ID, Int, ObjectType } from '@nestjs/graphql';
 import { modelOptions, prop } from '@typegoose/typegoose';
 
 @modelOptions({ schemaOptions: { collection: 'reviews' } })
@@ -19,7 +19,7 @@ export class Review {
   timestamp: string;
 
   @prop()
-  @Field(() => Int)
+  @Field(() => Float)
   rating: number;
 
   @prop()
