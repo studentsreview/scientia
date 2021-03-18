@@ -13,7 +13,7 @@ export class CoursesService {
   ) {}
 
   async findOne(query: FilterQuery<Course> = {}) {
-    return this.courseModel.findOne(query).populate('classes');
+    return this.courseModel.findOne(query);
   }
 
   async findAll(
@@ -22,10 +22,6 @@ export class CoursesService {
   ) {
     if (args.department) query.department = args.department;
     if (args.AtoG) query.AtoG = args.AtoG;
-    return this.courseModel
-      .find(query)
-      .populate('classes')
-      .skip(args.skip)
-      .limit(args.take);
+    return this.courseModel.find(query).skip(args.skip).limit(args.take);
   }
 }
