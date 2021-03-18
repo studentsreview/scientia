@@ -34,7 +34,13 @@ type Teacher {
   departments: [String!]!
   semesters: [String!]!
   classes(skip: Int = 0, take: Int = 25, semester: String, block: String, teacher: String): [Class!]!
+  reviews(skip: Int = 0, take: Int = 25, teacher: String, version: Int, timestampSort: SortType = ASC): [Review!]!
   rating: Float!
+}
+
+enum SortType {
+  ASC
+  DESC
 }
 
 type Review {
@@ -54,5 +60,5 @@ type Query {
   teacher(name: String, _id: String): Teacher
   teachers(skip: Int = 0, take: Int = 25, department: String, semester: String): [Teacher!]!
   review(_id: String): Review
-  reviews(skip: Int = 0, take: Int = 25, teacher: String, version: Int): [Review!]!
+  reviews(skip: Int = 0, take: Int = 25, teacher: String, version: Int, timestampSort: SortType = ASC): [Review!]!
 }

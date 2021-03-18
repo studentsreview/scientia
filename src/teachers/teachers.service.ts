@@ -9,11 +9,11 @@ import { TeacherModel } from './teachers.constants';
 export class TeachersService {
   constructor(
     @Inject(TeacherModel)
-    private readonly courseModel: ReturnModelType<typeof Teacher>,
+    private readonly teacherModel: ReturnModelType<typeof Teacher>,
   ) {}
 
   async findOne(query: FilterQuery<Teacher> = {}) {
-    return this.courseModel.findOne(query);
+    return this.teacherModel.findOne(query);
   }
 
   async findAll(
@@ -30,6 +30,6 @@ export class TeachersService {
         $elemMatch: { $eq: args.semester },
       };
     }
-    return this.courseModel.find(query).skip(args.skip).limit(args.take);
+    return this.teacherModel.find(query).skip(args.skip).limit(args.take);
   }
 }

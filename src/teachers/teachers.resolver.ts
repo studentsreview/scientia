@@ -14,6 +14,8 @@ import { Teacher } from './models/teacher.model';
 import { FilterQuery } from 'mongoose';
 import { GetClassesArgs } from 'src/classes/dto/classes.args';
 import { ReviewsService } from 'src/reviews/reviews.service';
+import { Review } from 'src/reviews/models/review.model';
+import { GetReviewsArgs } from 'src/reviews/dto/reviews.args';
 
 @Resolver(() => Teacher)
 export class TeachersResolver {
@@ -51,6 +53,11 @@ export class TeachersResolver {
       },
       args,
     );
+  }
+
+  @ResolveField(() => [Review])
+  reviews(@Parent() teacher: Teacher, @Args() args: GetReviewsArgs) {
+    return this.reviewsService.findAll({ teacher: teacher.name }, args);
   }
 
   @ResolveField(() => Float)
