@@ -25,7 +25,7 @@ type Course {
   length: String!
   AtoG: String!
   description: String!
-  classes(skip: Int = 0, take: Int = 25): [Class!]!
+  classes(skip: Int = 0, take: Int = 25, semester: String, block: String, teacher: String): [Class!]!
 }
 
 type Teacher {
@@ -33,14 +33,14 @@ type Teacher {
   name: String!
   departments: [String!]!
   semesters: [String!]!
-  classes(skip: Int = 0, take: Int = 25): [Class!]!
+  classes(skip: Int = 0, take: Int = 25, semester: String, block: String, teacher: String): [Class!]!
 }
 
 type Query {
-  course(_id: String!): Course
-  courses(skip: Int = 0, take: Int = 25): [Course!]!
+  course(name: String, _id: String): Course
+  courses(skip: Int = 0, take: Int = 25, department: String, AtoG: String): [Course!]!
   class(_id: String!): Class
-  classes(skip: Int = 0, take: Int = 25): [Class!]!
-  teacher(_id: String!): Teacher
-  teachers(skip: Int = 0, take: Int = 25): [Teacher!]!
+  classes(skip: Int = 0, take: Int = 25, semester: String, block: String, teacher: String): [Class!]!
+  teacher(name: String!, _id: String!): Teacher
+  teachers(skip: Int = 0, take: Int = 25, department: String, semester: String): [Teacher!]!
 }

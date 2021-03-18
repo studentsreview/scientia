@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ReturnModelType } from '@typegoose/typegoose';
-import { FindAllArgs } from 'src/common/dto/findall.args';
+import { FilterQuery } from 'mongoose';
 import { CourseModel } from './courses.constants';
+import { GetCoursesArgs } from './dto/courses.args';
 import { Course } from './models/course.model';
 
 @Injectable()
@@ -11,14 +12,16 @@ export class CoursesService {
     private readonly courseModel: ReturnModelType<typeof Course>,
   ) {}
 
-  async findOne(query: Partial<Course> = {}) {
+  async findOne(query: FilterQuery<Course> = {}) {
     return this.courseModel.findOne(query).populate('classes');
   }
 
   async findAll(
-    query: Partial<Course> = {},
-    args: FindAllArgs = new FindAllArgs(),
+    query: FilterQuery<Course> = {},
+    args: GetCoursesArgs = new GetCoursesArgs(),
   ) {
+    if (args.department) query.department = args.department;
+    if (args.AtoG) query.AtoG = args.AtoG;
     return this.courseModel
       .find(query)
       .populate('classes')
