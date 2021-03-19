@@ -25,7 +25,7 @@ export class ReviewsResolver {
     return this.reviewsService.findAll({}, args);
   }
 
-  @ResolveField(() => Teacher)
+  @ResolveField(() => Teacher, { nullable: true })
   teacher(@Parent() review: Review) {
     return this.teachersService.findOne({ name: review.teacher });
   }
