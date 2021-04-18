@@ -34,6 +34,13 @@ export class CoursesResolver {
     return this.coursesService.findAll({}, args);
   }
 
+  @ResolveField(() => [Course])
+  prerequisites(@Parent() course: Course) {
+    return this.coursesService.findAll({
+      name: { $in: course.prerequisites },
+    });
+  }
+
   @ResolveField(() => [Class])
   classes(@Parent() course: Course, @Args() args: GetClassesArgs) {
     return this.classesService.findAll({ name: course.name }, args);

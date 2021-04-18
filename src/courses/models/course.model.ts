@@ -20,7 +20,6 @@ export class Course {
   sectioned: boolean;
 
   @prop({ type: [String], default: [] })
-  @Field(() => [String])
   prerequisites: string[];
 
   @prop()

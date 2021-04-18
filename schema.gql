@@ -20,11 +20,11 @@ type Course {
   name: String!
   department: String!
   sectioned: Boolean!
-  prerequisites: [String!]!
   notes: String!
   length: String!
   AtoG: String!
   description: String!
+  prerequisites: [Course!]!
   classes(skip: Int = 0, take: Int = 25, semester: String, block: String, teacher: String): [Class!]!
 }
 
