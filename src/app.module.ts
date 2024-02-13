@@ -9,7 +9,7 @@ import { TeachersModule } from './teachers/teachers.module';
 const connectionFactory = {
   provide: 'CONNECTION',
   useFactory: async () => {
-    const connection = await mongoose.connect('mongodb://localhost:27017', {
+    const connection = await mongoose.connect('mongodb://0.0.0.0:27017', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       dbName: 'StudentsReview',
